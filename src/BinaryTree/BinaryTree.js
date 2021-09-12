@@ -26,6 +26,11 @@ export default class BinaryTree {
     //----------------INSERT DATA-----------
     //--------------------------------------
     insert(dataX, dataY, dataValue) {
+        // handle input error
+        if(dataX >= dataY) {
+            alert('The first parameter X must be lower than the second parameter Y.'); 
+            return false; 
+        }
         console.log('inserting: ', dataX, ' ,', dataY, ' ,', dataValue); 
         if(this.root === null) {
             // no root exists so data goes here first 
@@ -66,22 +71,32 @@ export default class BinaryTree {
     //------------------------------------------
     //----------------RETRIEVE DATA-------------
     //------------------------------------------
-    retrieve(data) {
+    retrieve(data) { 
         if (this.root === null) {
             // no root, game over 
+            console.log('No root');
             return false;
         }
         let node = this.root;
         let found = false; 
+        console.log('retrieve: ', data); 
         while (node && !found) {
-            if (data < node.x) {
+            if ((data >= node.x) && (data < node.y)) {
+                found = node.value; 
+                console.log('Found: ', found); 
+                return found; 
+            }
+            else if ( (data <= node.x) && !!node.left ) {
+                console.log('branch left');
                 node = node.left;
             }
-            else if (data > node.x) {
+            else if ( (data >= node.x) && !!node.right ) {
+                console.log('branch right'); 
                 node = node.right;
             }
             else {
-                found = node; 
+                console.log('Not found');
+                return false; 
             }
         }
         return found; 

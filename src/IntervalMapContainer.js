@@ -83,8 +83,11 @@ const IntervalMapContainer = () => {
   //------------------------------------------------
 
   let tree = new BinaryTree(); 
-  tree.insert(10,12,'A');tree.insert(4,6,'B');tree.insert(7,9,'C');tree.insert(12,13,'D')
+  tree.insert(9,12,'A');
+  tree.insert(4,6,'B');tree.insert(2,3,'F');tree.insert(7,9,'C');tree.insert(12,13,'D');
+  // tree.insert(10,11,'E')
   console.log('TREE: ', tree)
+  tree.retrieve(3)
 
 
   return (
