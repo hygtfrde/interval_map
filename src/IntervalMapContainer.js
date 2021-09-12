@@ -105,7 +105,7 @@ const IntervalMapContainer = () => {
 
       <div>
         <h3>Map To Value</h3>
-        {output ? output : null}
+        {output ? output : 0}
       </div>
 
       
