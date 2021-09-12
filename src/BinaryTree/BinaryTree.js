@@ -77,48 +77,28 @@ export default class BinaryTree {
                         let newLeft = new Node(node.x, dataX, node.value);
                         let newMiddle = new Node(dataX, dataY, dataValue);
                         let newRight = new Node(dataY, node.y, node.value);  
-                        // set new left and right 
-                        // if right and left nodes exist 
-                        if (!!node.left){
-                            newLeft.left = node.left; 
-                        }
-                        if (!!node.right){
-                            newRight.right = node.right; 
-                        }
-                        // set new middle branches 
+                        node.left = newLeft.left; 
+                        node.right = newRight.right; 
                         newLeft.right = newMiddle;
                         newMiddle.right = newRight;
-
                 }
                 else if ( (dataX <= node.x) && ( (dataY >= node.x) && (dataY < node.y) ) ) {
                     console.log('Left slice')
                     let newLeft = new Node(dataX, dataY, dataValue);
                     let newRight = new Node(dataY, node.y, node.value); 
-                        // set new left and right 
-                        // if right and left nodes exist 
-                        if (!!node.left){
-                            newLeft.left = node.left; 
-                        }
-                        if (!!node.right){
-                            newRight.right = node.right; 
-                        }
-                        // set new middle branches 
-                        newLeft.right = newRight; 
+                    node.left = newLeft; 
+                    node.right = newRight; 
+                    // set new middle branches 
+                    newLeft.right = newRight; 
                 }
                 else if ( ((dataX >= node.x) && (dataX < node.y)) && (dataY > node.y) ) {
                     console.log('Right slice')
                     let newLeft = new Node(node.x, dataX, node.value);
                     let newRight = new Node(dataX, dataY, dataValue);
-                        // set new left and right 
-                        // if right and left nodes exist 
-                        if (!!node.left){
-                            newLeft.left = node.left; 
-                        }
-                        if (!!node.right){
-                            newRight.right = node.right; 
-                        }
-                        // set new middle branches 
-                        newLeft.right = newRight; 
+                    node.left = newLeft.left; 
+                    node.right = newRight.right; 
+                    // set new middle branches 
+                    newLeft.right = newRight; 
                 }
             }
             return searchBinaryTree(node);
