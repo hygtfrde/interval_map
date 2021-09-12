@@ -1,15 +1,23 @@
-import React, { useState } from 'react'; 
+import React, { useState, useEffect } from 'react'; 
 import './IntervalMapContainer.css';
 import BinaryTree from './BinaryTree/BinaryTree';
 
 const IntervalMapContainer = () => {
+  // state variables 
   const [k1, setK1] = useState(null);
   const [k2, setK2] = useState(null);
   const [v, setV] = useState(null);
   const [kX, setKX] = useState(null);
+  const [binTree, setBinTree] = useState(); 
 
 
   const [intervalState, setIntervalState] = useState([]); 
+
+  useEffect( ()=>{
+    let newTree = new BinaryTree(); 
+    setBinTree(newTree);
+    console.log('created binary tree on initial render'); 
+  },[])
 
   // state variables 
   // create interval => value 
@@ -74,20 +82,26 @@ const IntervalMapContainer = () => {
       setK2(null); 
     }
     console.log('v: ', v);
+    binTree.insert(k1, k2, v); 
+    
     
   }
   const handleRetrievalSubmit = (e) => {
     e.preventDefault();
-    console.log('kX: ', kX); 
+    // if(typeof e.target.value !== 'number') {
+    //   alert('Please retrieve a number type');
+    //   return false; 
+    // }
+    binTree.retrieve(kX);
   }
   //------------------------------------------------
 
-  let tree = new BinaryTree(); 
-  tree.insert(9,12,'A');
-  tree.insert(4,6,'B');tree.insert(2,3,'F');tree.insert(7,9,'C');tree.insert(12,13,'D');
-  // tree.insert(10,11,'E')
-  console.log('TREE: ', tree)
-  tree.retrieve(3)
+  // let tree = new BinaryTree(); 
+  // tree.insert(9,12,'A');
+  // tree.insert(4,6,'B');tree.insert(2,3,'F');tree.insert(7,9,'C');tree.insert(12,13,'D');
+  // // tree.insert(10,11,'E')
+  // console.log('TREE: ', tree)
+  // tree.retrieve(3)
 
 
   return (
