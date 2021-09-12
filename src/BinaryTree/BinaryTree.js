@@ -36,23 +36,28 @@ export default class BinaryTree {
             const node = this.root; 
             // search where to add new data
             const searchBinaryTree = (node) => {
-                if(dataX < node.x && node.left) {
+
+                // data interval is to the left
+                if( (dataX < node.x) && (dataY < node.x) && !!node.left ) {
                     // recusively call function on left node
                     searchBinaryTree(node.left);
                 }
-                else if (dataX < node.x) {
-                    // left node does not exists
-                    // so data goes here 
-                    node.left = new Node(dataX); 
+                // found a leaf, insert here 
+                else if ( (dataX < node.x) && (dataY < node.x) ) {
+                    // left node leaf does not exists
+                    // so data goes there 
+                    node.left = new Node(dataX, dataY, dataValue); 
                 }
-                else if (dataX > node.x && node.right) {
+                // data interval is to the right 
+                else if ( (dataX > node.x) && (dataY > node.y) && !!node.right ) {
                     // recusively call function on right node
                     searchBinaryTree(node.right);
                 }
-                else if (dataX > node.x) {
-                    // right node does not exists
-                    // so data goes here 
-                    node.right = new Node(dataX);
+                // found a leaf, insert here 
+                else if ( (dataX > node.x) && (dataY > node.x) ) {
+                    // right node leaf does not exists
+                    // so data goes there 
+                    node.right = new Node(dataX, dataY, dataValue);
                 }
             }
             return searchBinaryTree(node);
