@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import IntervalMapContainer from './IntervalMapContainer';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <IntervalMapContainer />
   </React.StrictMode>,
   document.getElementById('root')
 );
