@@ -77,28 +77,29 @@ export default class BinaryTree {
                         let newLeft = new Node(node.x, dataX, node.value);
                         let newMiddle = new Node(dataX, dataY, dataValue);
                         let newRight = new Node(dataY, node.y, node.value);  
-                        node.left = newLeft.left; 
-                        node.right = newRight.right; 
+                        // set new middle branches 
+                        node.left = newLeft; 
                         newLeft.right = newMiddle;
                         newMiddle.right = newRight;
+                        node.right = newRight; 
                 }
                 else if ( (dataX <= node.x) && ( (dataY >= node.x) && (dataY < node.y) ) ) {
                     console.log('Left slice')
                     let newLeft = new Node(dataX, dataY, dataValue);
                     let newRight = new Node(dataY, node.y, node.value); 
-                    node.left = newLeft; 
-                    node.right = newRight; 
                     // set new middle branches 
+                    node.left = newLeft; 
                     newLeft.right = newRight; 
+                    node.right = newRight; 
                 }
                 else if ( ((dataX >= node.x) && (dataX < node.y)) && (dataY > node.y) ) {
                     console.log('Right slice')
                     let newLeft = new Node(node.x, dataX, node.value);
                     let newRight = new Node(dataX, dataY, dataValue);
-                    node.left = newLeft.left; 
-                    node.right = newRight.right; 
                     // set new middle branches 
+                    node.left = newLeft; 
                     newLeft.right = newRight; 
+                    node.right = newRight; 
                 }
             }
             return searchBinaryTree(node);
