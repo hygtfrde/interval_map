@@ -1,5 +1,6 @@
 {
   "name": "challenege01",
+  "author": "Harold Ulrich",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

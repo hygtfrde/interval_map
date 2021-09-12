@@ -9,6 +9,10 @@
   font-size: calc(10px + 2vmin);
   color: antiquewhite;
 }
+.user_interface {
+  border: 3px dotted aquamarine; 
+  margin: 2px 2px; 
+}
 
 /* ------------------------------------------------ */
 /* ---------------- Spinning Logo Code -----------  */

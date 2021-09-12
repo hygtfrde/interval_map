@@ -41,28 +41,84 @@ export default class BinaryTree {
             const node = this.root; 
             // search where to add new data
             const searchBinaryTree = (node) => {
-
+ 
                 // data interval is to the left
-                if( (dataX < node.x) && (dataY < node.x) && !!node.left ) {
+                if( (dataX <= node.x) && (dataY <= node.x) && !!node.left ) {
                     // recusively call function on left node
                     searchBinaryTree(node.left);
                 }
+                // CASE 1: no overlap of intervals, left side
                 // found a leaf, insert here 
-                else if ( (dataX < node.x) && (dataY < node.x) ) {
+                else if ( (dataX <= node.x) && (dataY <= node.x) ) {
                     // left node leaf does not exists
                     // so data goes there 
                     node.left = new Node(dataX, dataY, dataValue); 
                 }
                 // data interval is to the right 
-                else if ( (dataX > node.x) && (dataY > node.y) && !!node.right ) {
+                else if ( (dataX > node.y) && (dataY > node.y) && !!node.right ) {
                     // recusively call function on right node
                     searchBinaryTree(node.right);
                 }
+                // CASE 2: no overlap of intervals, right side 
                 // found a leaf, insert here 
-                else if ( (dataX > node.x) && (dataY > node.x) ) {
+                else if ( (dataX > node.y) && (dataY > node.y) ) {
                     // right node leaf does not exists
                     // so data goes there 
                     node.right = new Node(dataX, dataY, dataValue);
+                }
+                // CASE 3: interval to be inserted is in between
+                else if ( 
+                    ( (dataX >= node.x) && (dataX < node.y) ) 
+                    && 
+                    ( (dataY >= node.x) && (dataY < node.y) ) 
+                    ) 
+                    {
+                        console.log('Middle slice')
+                        let newLeft = new Node(node.x, dataX, node.value);
+                        let newMiddle = new Node(dataX, dataY, dataValue);
+                        let newRight = new Node(dataY, node.y, node.value);  
+                        // set new left and right 
+                        // if right and left nodes exist 
+                        if (!!node.left){
+                            newLeft.left = node.left; 
+                        }
+                        if (!!node.right){
+                            newRight.right = node.right; 
+                        }
+                        // set new middle branches 
+                        newLeft.right = newMiddle;
+                        newMiddle.right = newRight;
+
+                }
+                else if ( (dataX <= node.x) && ( (dataY >= node.x) && (dataY < node.y) ) ) {
+                    console.log('Left slice')
+                    let newLeft = new Node(dataX, dataY, dataValue);
+                    let newRight = new Node(dataY, node.y, node.value); 
+                        // set new left and right 
+                        // if right and left nodes exist 
+                        if (!!node.left){
+                            newLeft.left = node.left; 
+                        }
+                        if (!!node.right){
+                            newRight.right = node.right; 
+                        }
+                        // set new middle branches 
+                        newLeft.right = newRight; 
+                }
+                else if ( ((dataX >= node.x) && (dataX < node.y)) && (dataY > node.y) ) {
+                    console.log('Right slice')
+                    let newLeft = new Node(node.x, dataX, node.value);
+                    let newRight = new Node(dataX, dataY, dataValue);
+                        // set new left and right 
+                        // if right and left nodes exist 
+                        if (!!node.left){
+                            newLeft.left = node.left; 
+                        }
+                        if (!!node.right){
+                            newRight.right = node.right; 
+                        }
+                        // set new middle branches 
+                        newLeft.right = newRight; 
                 }
             }
             return searchBinaryTree(node);

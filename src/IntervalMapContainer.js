@@ -9,60 +9,36 @@ const IntervalMapContainer = () => {
   const [v, setV] = useState(null);
   const [kX, setKX] = useState(null);
   const [binTree, setBinTree] = useState(); 
+  const [output, setOutput] = useState(null); 
 
-
-  const [intervalState, setIntervalState] = useState([]); 
-
+  // handle initialization 
   useEffect( ()=>{
     let newTree = new BinaryTree(); 
     setBinTree(newTree);
-    console.log('created binary tree on initial render'); 
+    console.log('created binary tree after initial render'); 
   },[])
-
-  // state variables 
-  // create interval => value 
-
-  // let intervlas = []; 
-  // const insertValues = (k1,k2,v) => {
-  //   let intervals = []; 
-  //   let newInterval = [k1,k2,v]; 
-  //   intervals.push(newInterval); 
-  // }
-  // const retrieveValues = (k) => {
-  //   let intervalValues = []; 
-  //   // O(n) time
-  //   // need recursion for logarithmic O(log(n)) time 
-  //   for(let i = 0;i < intervals.length; i++) {
-  //     if( (k >= intervals[i][0]) && (k < intervals[i][1]) ){
-  //       // if no multiple values or overlapping intervlas, only return first value found in the interval 
-  //       // return intervals[i][2]
-  //       intervalValues.push(intervals[i][2]);
-  //     }
-  //   }
-  //   return intervalValues; 
-  // }
 
   //------------------------------------------------
   //------------ Handle Input Changes --------------
   //------------------------------------------------
   const handleK1Change = (e) => {
     let k1Value = e.target.value; 
-    console.log('k1Value ',k1Value);
+    // console.log('k1Value ',k1Value);
     setK1(k1Value); 
   }
   const handleK2Change = (e) => {
     let k2Value = e.target.value; 
-    console.log('k2Value ',k2Value);
+    // console.log('k2Value ',k2Value);
     setK2(k2Value);
   }
   const handleVChange = (e) => {
     let vValue = e.target.value; 
-    console.log('vValue ',vValue);
+    // console.log('vValue ',vValue);
     setV(vValue); 
   }
   const handleKXChange = (e) => {
     let kXValue = e.target.value; 
-    console.log('kXValue ',kXValue);
+    // console.log('kXValue ',kXValue);
     setKX(kXValue); 
   }
   //------------------------------------------------
@@ -83,16 +59,14 @@ const IntervalMapContainer = () => {
     }
     console.log('v: ', v);
     binTree.insert(k1, k2, v); 
-    
-    
+    console.log('Binary Tree => ', binTree); 
   }
   const handleRetrievalSubmit = (e) => {
     e.preventDefault();
-    // if(typeof e.target.value !== 'number') {
-    //   alert('Please retrieve a number type');
-    //   return false; 
-    // }
-    binTree.retrieve(kX);
+    let retrieval = binTree.retrieve(kX);
+    console.log('setting output ', retrieval); 
+    setOutput(retrieval); 
+    console.log('output ', output)
   }
   //------------------------------------------------
 
@@ -106,9 +80,12 @@ const IntervalMapContainer = () => {
 
   return (
     <div className="App">
-      <header><h1>Interval Map Container</h1></header>
+      <header>
+        <h1>Interval Map Container</h1>
+        <h5>by Harold Ulrich</h5>
+      </header>
 
-      <div>
+      <div className='user_interface'>
         <h3>Insertion</h3>
         <form onSubmit={handleInsertionSubmit}>
           <input onChange={handleK1Change} placeholder='K_1: lower bound'/> <br></br>
@@ -118,13 +95,18 @@ const IntervalMapContainer = () => {
         </form>
       </div> 
 
-      <div>
+      <div className='user_interface'>
         <h3>Retrieval</h3>
         <form onSubmit={handleRetrievalSubmit}>
           <input onChange={handleKXChange} placeholder='K_x: retrieve value'/> <br></br>
           <button type='submit'>Submit</button>
         </form>
       </div> 
+
+      <div>
+        <h3>Map To Value</h3>
+        {output ? output : null}
+      </div>
 
       
 
