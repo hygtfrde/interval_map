@@ -29,6 +29,8 @@ export default class BinaryTree {
         // handle input error
         if(dataX >= dataY) {
             alert('The first parameter X must be lower than the second parameter Y.'); 
+            console.log('dataX ', dataX);
+            console.log('dataY ', dataY); 
             return false; 
         }
         console.log('inserting: ', dataX, ' ,', dataY, ' ,', dataValue); 
@@ -83,6 +85,7 @@ export default class BinaryTree {
                         newMiddle.right = newRight;
                         node.right = newRight; 
                 }
+                // CASE 4: interval splits left
                 else if ( (dataX <= node.x) && ( (dataY >= node.x) && (dataY < node.y) ) ) {
                     console.log('Left slice')
                     let newLeft = new Node(dataX, dataY, dataValue);
@@ -92,6 +95,7 @@ export default class BinaryTree {
                     newLeft.right = newRight; 
                     node.right = newRight; 
                 }
+                // CASE 5: interval splits left 
                 else if ( ((dataX >= node.x) && (dataX < node.y)) && (dataY > node.y) ) {
                     console.log('Right slice')
                     let newLeft = new Node(node.x, dataX, node.value);

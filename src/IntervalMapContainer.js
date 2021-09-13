@@ -23,22 +23,24 @@ const IntervalMapContainer = () => {
   //------------------------------------------------
   const handleK1Change = (e) => {
     let k1Value = e.target.value; 
-    // console.log('k1Value ',k1Value);
+    k1Value = Number(k1Value); 
+    console.log('k1Value ',k1Value);
     setK1(k1Value); 
   }
   const handleK2Change = (e) => {
     let k2Value = e.target.value; 
-    // console.log('k2Value ',k2Value);
+    k2Value = Number(k2Value); 
+    console.log('k2Value ',k2Value);
     setK2(k2Value);
   }
   const handleVChange = (e) => {
     let vValue = e.target.value; 
-    // console.log('vValue ',vValue);
+    console.log('vValue ',vValue);
     setV(vValue); 
   }
   const handleKXChange = (e) => {
     let kXValue = e.target.value; 
-    // console.log('kXValue ',kXValue);
+    console.log('kXValue ',kXValue);
     setKX(kXValue); 
   }
   //------------------------------------------------
@@ -48,34 +50,39 @@ const IntervalMapContainer = () => {
   //-------------------------------------------------
   const handleInsertionSubmit = (e) => {
     e.preventDefault();
-    // if values not null 
-    console.log('k1: ', k1);
-    console.log('k2: ', k2);
     // error check correct intervals [ k1, k2 )
     if(k1>=k2){
       alert('k1 must be lower than k2'); 
+      console.log('k1 ', k1, ' >= k2 ', k2)
       setK1(null);
       setK2(null); 
+      document.getElementById('insert_form').reset();
+      return; 
     }
+    if(k1 == null && k2 == null) {
+      alert('values cannot be empty');
+      return; 
+    }
+    console.log('k1: ', k1);
+    console.log('k2: ', k2);
     console.log('v: ', v);
     binTree.insert(k1, k2, v); 
+
     console.log('Binary Tree => ', binTree); 
+    document.getElementById('insert_form').reset();
+
   }
+
   const handleRetrievalSubmit = (e) => {
     e.preventDefault();
     let retrieval = binTree.retrieve(kX);
     console.log('setting output ', retrieval); 
     setOutput(retrieval); 
-    console.log('output ', output)
+    console.log('output ', output);
+    document.getElementById('retrieve_form').reset();
+
   }
   //------------------------------------------------
-
-  // let tree = new BinaryTree(); 
-  // tree.insert(9,12,'A');
-  // tree.insert(4,6,'B');tree.insert(2,3,'F');tree.insert(7,9,'C');tree.insert(12,13,'D');
-  // // tree.insert(10,11,'E')
-  // console.log('TREE: ', tree)
-  // tree.retrieve(3)
 
 
   return (
@@ -87,7 +94,7 @@ const IntervalMapContainer = () => {
 
       <div className='user_interface'>
         <h3>Insertion</h3>
-        <form onSubmit={handleInsertionSubmit}>
+        <form id='insert_form' onSubmit={handleInsertionSubmit}>
           <input onChange={handleK1Change} placeholder='K_1: lower bound'/> <br></br>
           <input onChange={handleK2Change} placeholder='K_2: upper bound'/> <br></br>
           <input onChange={handleVChange} placeholder='V: value'/> <br></br>
@@ -97,7 +104,7 @@ const IntervalMapContainer = () => {
 
       <div className='user_interface'>
         <h3>Retrieval</h3>
-        <form onSubmit={handleRetrievalSubmit}>
+        <form id='retrieve_form' onSubmit={handleRetrievalSubmit}>
           <input onChange={handleKXChange} placeholder='K_x: retrieve value'/> <br></br>
           <button type='submit'>Submit</button>
         </form>
