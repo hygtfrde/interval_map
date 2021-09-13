@@ -24,23 +24,23 @@ const IntervalMapContainer = () => {
   const handleK1Change = (e) => {
     let k1Value = e.target.value; 
     k1Value = Number(k1Value); 
-    console.log('k1Value ',k1Value);
+    // console.log('k1Value ',k1Value);
     setK1(k1Value); 
   }
   const handleK2Change = (e) => {
     let k2Value = e.target.value; 
     k2Value = Number(k2Value); 
-    console.log('k2Value ',k2Value);
+    // console.log('k2Value ',k2Value);
     setK2(k2Value);
   }
   const handleVChange = (e) => {
     let vValue = e.target.value; 
-    console.log('vValue ',vValue);
+    // console.log('vValue ',vValue);
     setV(vValue); 
   }
   const handleKXChange = (e) => {
     let kXValue = e.target.value; 
-    console.log('kXValue ',kXValue);
+    // console.log('kXValue ',kXValue);
     setKX(kXValue); 
   }
   //------------------------------------------------
@@ -53,7 +53,6 @@ const IntervalMapContainer = () => {
     // error check correct intervals [ k1, k2 )
     if(k1>=k2){
       alert('k1 must be lower than k2'); 
-      console.log('k1 ', k1, ' >= k2 ', k2)
       setK1(null);
       setK2(null); 
       document.getElementById('insert_form').reset();
@@ -63,9 +62,9 @@ const IntervalMapContainer = () => {
       alert('values cannot be empty');
       return; 
     }
-    console.log('k1: ', k1);
-    console.log('k2: ', k2);
-    console.log('v: ', v);
+    // console.log('k1: ', k1);
+    // console.log('k2: ', k2);
+    // console.log('v: ', v);
     binTree.insert(k1, k2, v); 
 
     console.log('Binary Tree => ', binTree); 

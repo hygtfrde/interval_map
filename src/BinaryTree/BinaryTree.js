@@ -80,10 +80,9 @@ export default class BinaryTree {
                         let newMiddle = new Node(dataX, dataY, dataValue);
                         let newRight = new Node(dataY, node.y, node.value);  
                         // set new middle branches 
-                        node.left = newLeft; 
-                        newLeft.right = newMiddle;
-                        newMiddle.right = newRight;
-                        node.right = newRight; 
+                        node.left = newRight; 
+                        newRight.left = newMiddle;
+                        newMiddle.left = newLeft;
                 }
                 // CASE 4: interval splits left
                 else if ( (dataX <= node.x) && ( (dataY >= node.x) && (dataY < node.y) ) ) {
@@ -91,19 +90,23 @@ export default class BinaryTree {
                     let newLeft = new Node(dataX, dataY, dataValue);
                     let newRight = new Node(dataY, node.y, node.value); 
                     // set new middle branches 
-                    node.left = newLeft; 
-                    newLeft.right = newRight; 
-                    node.right = newRight; 
+                    node.left = newRight; 
+                    newRight.left = newLeft; 
                 }
-                // CASE 5: interval splits left 
+                // CASE 5: interval splits right 
                 else if ( ((dataX >= node.x) && (dataX < node.y)) && (dataY > node.y) ) {
                     console.log('Right slice')
                     let newLeft = new Node(node.x, dataX, node.value);
                     let newRight = new Node(dataX, dataY, dataValue);
                     // set new middle branches 
-                    node.left = newLeft; 
-                    newLeft.right = newRight; 
-                    node.right = newRight; 
+                    node.left = newRight; 
+                    newRight.left = newLeft; 
+                }
+                // CASE 6: interval is larger than any existing 
+                else if ( (dataX <= node.x) && (dataY > node.y) ) {
+                    console.log('Larger interval');
+                    node.x = dataX;
+                    node.y = dataY; 
                 }
             }
             return searchBinaryTree(node);
