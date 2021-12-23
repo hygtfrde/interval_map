@@ -6,7 +6,7 @@ Retrieval takes a number as input, searches the binary tree, and returns the val
 
 # Software Dependencies: 
 * Node.js https://nodejs.org/en/download/ 
-* * NPM https://www.npmjs.com/ 
+* NPM https://www.npmjs.com/ 
 
 # To install and run, use NPM in the package.json directory:
 
